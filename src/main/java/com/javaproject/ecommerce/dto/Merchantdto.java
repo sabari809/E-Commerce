@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class Customerdto {
+public class Merchantdto {
 
 	@Size(min = 5,max = 15,message = "* Name should be have 5~15 characters")
 	private String name;

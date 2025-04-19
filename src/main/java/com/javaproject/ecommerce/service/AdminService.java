@@ -4,19 +4,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import com.javaproject.ecommerce.dto.Customerdto;
+import com.javaproject.ecommerce.dto.Admindto;
 
 import jakarta.validation.Valid;
 
 @Service
-public class CustomerService {
+public class AdminService {
 
-	public String register(Customerdto customerdto, Model model) {
+	public String register(Admindto admindto, Model model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String register(@Valid Customerdto customerdto, BindingResult result) {
+	public String register(@Valid Admindto admindto, BindingResult result) {
 		// TODO Auto-generated method stub
 		return null;
 	}
