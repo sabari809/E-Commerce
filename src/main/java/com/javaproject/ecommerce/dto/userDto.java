@@ -5,8 +5,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
-public class Admindto {
+@Data
+public class userDto {
 
 	@Size(min = 5,max = 15,message = "* Name should be within 5 ~ 15")
 	private String name;

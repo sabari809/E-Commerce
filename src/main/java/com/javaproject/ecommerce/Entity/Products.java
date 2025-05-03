@@ -2,9 +2,9 @@ package com.javaproject.ecommerce.Entity;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.javaproject.ecommerce.dto.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,8 +15,8 @@ import lombok.Data;
 
 @Entity
 @Data
-public class MerchantEntity {
-
+public class Products {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -24,12 +24,23 @@ public class MerchantEntity {
 	@Column(nullable = false)
 	private String name;
 	
-	@Column(nullable = false,unique = true)
-	private String email;
+	@Column(nullable = false)
+	private String category;
 	
 	@Column(nullable = false)
-	private String password;
+	private String description;
 	
-	@CreationTimestamp
-	private LocalDateTime registeredAt;
+	@Column(nullable = false)
+	private Double price;
+	
+	@Column(nullable = false)
+	private String imageUrl;
+	
+	@Column(nullable = false)
+	private Status status;
+	
+	
+	@UpdateTimestamp
+	private LocalDateTime createdTime;
+	
 }

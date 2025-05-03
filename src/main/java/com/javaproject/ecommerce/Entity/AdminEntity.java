@@ -1,5 +1,9 @@
 package com.javaproject.ecommerce.Entity;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,4 +27,6 @@ public class AdminEntity {
 		
 		@Column(nullable = false)
 		private String password;
+		
+		
 }

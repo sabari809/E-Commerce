@@ -1,24 +1,18 @@
 package com.javaproject.ecommerce.service;
 
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import com.javaproject.ecommerce.dto.Merchantdto;
+import com.javaproject.ecommerce.dto.userDto;
 
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpSession;
 
-@Service
-public class MerchantService {
+public interface MerchantService {
 
-	public String register(Merchantdto merchantdto, Model model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String register(userDto userDto, Model model);
 
-	public String register(@Valid Merchantdto merchantdto, BindingResult result) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String register(userDto userDto, BindingResult result,HttpSession session);
+
+	public String submitOtp(int otp, HttpSession session);
 
 }

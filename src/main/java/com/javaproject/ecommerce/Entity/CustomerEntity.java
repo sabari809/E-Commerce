@@ -11,8 +11,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 @Entity
+@Data
 public class CustomerEntity {
 
 	@Id
@@ -29,7 +31,7 @@ public class CustomerEntity {
 	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	@CreationTimestamp
-	private LocalDateTime registeredsat;
+	private LocalDateTime registeredAt;
 }

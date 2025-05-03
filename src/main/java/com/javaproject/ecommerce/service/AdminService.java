@@ -1,24 +1,21 @@
 package com.javaproject.ecommerce.service;
 
-import org.springframework.stereotype.Service;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import com.javaproject.ecommerce.dto.Admindto;
+import com.javaproject.ecommerce.dto.userDto;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-@Service
-public class AdminService {
 
-	public String register(Admindto admindto, Model model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public interface AdminService {
 
-	public String register(@Valid Admindto admindto, BindingResult result) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	String register(userDto userDto, Model model);
+
+	public String register(@Valid userDto userDto, BindingResult result,HttpSession session);
+
+	String submitOtp(int otp, HttpSession session);
 
 }
