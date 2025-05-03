@@ -43,7 +43,9 @@ public class MerchantController {
 	}
 	
 	@GetMapping("/home")
- 	public String loadHome() {
+ 	public String loadHome(HttpSession session) {
+		 session.removeAttribute("pass");
+		 session.removeAttribute("fail");
  		return "merchant-home.html";
  	}
 	

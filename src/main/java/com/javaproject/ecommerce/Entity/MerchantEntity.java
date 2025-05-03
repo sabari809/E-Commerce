@@ -31,5 +31,5 @@ public class MerchantEntity {
 	private String password;
 	
 	@CreationTimestamp
-	private LocalDateTime registeredAt;
+	private LocalDateTime registered_At;
 }
