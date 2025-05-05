@@ -1,53 +1,137 @@
 <!DOCTYPE html>
- <html xmlns:th="http://www.thymeleaf.org">
- <head>
-     <meta charset="UTF-8">
-     <title>Admin Registration</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-     
- </head>
- <body>
-     <div class="container mt-5">
-         <div class="row justify-content-center">
-             <div class="col-md-6">
-                 <div class="card">
-                     <div class="card-header">
-                         <h3 class="text-center">Admin Registration</h3>
-                     </div>
-                     <div class="card-body">
-                         <form action="/admin/register" method="post" th:object="${userDto}">
-                             <div class="mb-3">
-                                 <label for="name" class="form-label">Name</label>
-                                 <input type="text" class="form-control" id="name" th:field="*{name}">
-                                 <span class="text-danger small" th:errors="*{name}"></span>
-                             </div>
-                             <div class="mb-3">
-                                 <label for="email" class="form-label">Email</label>
-                                 <input type="email" class="form-control" id="email" th:field="*{email}">
-                                 <span class="text-danger small" th:errors="*{email}"></span>
-                             </div>
-                             <div class="mb-3">
-                                 <label for="password" class="form-label">Password</label>
-                                 <input type="password" class="form-control" id="password" th:field="*{password}">
-                                 <span class="text-danger small" th:errors="*{password}"></span>
-                             </div>
-                             <div class="mb-3">
-                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                 <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}">
-                                 <span class="text-danger small" th:errors="*{confirmPassword}"></span>
-                             </div>
-                             <div class="mb-3 form-check">
-                                 <input type="checkbox" class="form-check-input" id="terms" th:field="*{terms}" value="true">
-                                 <label class="form-check-label" for="terms">I accept the terms and conditions</label><br>
-                                 <span class="text-danger small" th:errors="*{terms}"></span>
-                             </div>
-                             <div class="text-center">
-                                 <button type="submit" class="btn btn-primary">Register</button>
-                             </div>
-                         </form>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
- </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f8f9fa;
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 480px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #3a86ff;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #3a86ff;
+    }
+
+    .form-check {
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+
+    .form-check-input {
+      margin-right: 8px;
+    }
+
+    .form-check-label {
+      color: #333;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3a86ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #2878ff;
+    }
+
+    .text-danger {
+      font-size: 0.8rem;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h3>Admin Registration</h3>
+    <form action="/admin/register" method="post" th:object="${userDto}">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <span class="text-danger" th:errors="*{name}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" th:field="*{email}" />
+        <span class="text-danger" th:errors="*{email}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" th:field="*{password}" />
+        <span class="text-danger" th:errors="*{password}"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" th:field="*{confirmPassword}" />
+        <span class="text-danger" th:errors="*{confirmPassword}"></span>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="terms" th:field="*{terms}" value="true" />
+        <label class="form-check-label" for="terms">I accept the terms and conditions</label>
+        <br />
+        <span class="text-danger" th:errors="*{terms}"></span>
+      </div>
+
+      <button type="submit" class="submit-button">Register</button>
+    </form>
+  </div>
+</body>
+</html>

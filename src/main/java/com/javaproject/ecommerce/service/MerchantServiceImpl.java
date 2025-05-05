@@ -8,14 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.javaproject.ecommerce.Entity.MerchantEntity;
+import com.javaproject.ecommerce.Entity.Products;
 import com.javaproject.ecommerce.Helper.AES;
+import com.javaproject.ecommerce.Helper.CloudinaryHelper;
 import com.javaproject.ecommerce.Helper.EmailSender;
 import com.javaproject.ecommerce.Repository.AdminRepo;
 import com.javaproject.ecommerce.Repository.CustomerRepo;
 import com.javaproject.ecommerce.Repository.MerchantRepo;
+import com.javaproject.ecommerce.Repository.ProductRepo;
+import com.javaproject.ecommerce.controller.AdminController;
+import com.javaproject.ecommerce.dto.Productdto;
+import com.javaproject.ecommerce.dto.Status;
 import com.javaproject.ecommerce.dto.userDto;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Service
 public class MerchantServiceImpl implements MerchantService{
@@ -30,7 +37,17 @@ public class MerchantServiceImpl implements MerchantService{
 	MerchantRepo merchantRepo;
 	
 	@Autowired
+	ProductRepo productRepo;
+	
+	@Autowired
 	EmailSender emailSender;
+	
+	@Autowired
+	CloudinaryHelper cloudinaryHelper;
+
+
+  
+
 	
 	@Override
 	public String register(userDto userDto,Model model) {
@@ -73,4 +90,62 @@ public class MerchantServiceImpl implements MerchantService{
  			return "redirect:/merchant/otp";
  		}
  	}
+	
+	@Override
+	public String loadHome(HttpSession session) {
+		MerchantEntity merchantEntity = (MerchantEntity) session.getAttribute("merchant");
+		
+		if (merchantEntity!=null) {
+			return "merchant-home.html";
+		}else {
+			return "redirect:login";
+		}
+	
+	}
+	
+	@Override
+	public String loadAddProduct(Productdto productdto, Model model, HttpSession session) {
+		
+		MerchantEntity merchantEntity = (MerchantEntity) session.getAttribute("merchant");
+		
+		if (merchantEntity!=null) {
+			model.addAttribute("productdto",productdto);
+			return "add-product.html";
+		}else {
+			session.setAttribute("fail", "Invalid Session First Login to Access");
+			return "redirect:/login";
+		}
+		
+		
+	}
+	
+	@Override
+	public String addProduct(@Valid Productdto productdto, HttpSession session, BindingResult result) {
+		MerchantEntity merchantEntity = (MerchantEntity) session.getAttribute("merchant");
+		
+		if(merchantEntity!=null) {
+			if(productdto.getImage().isEmpty())result.rejectValue("image", "error.image","* Select One Image");
+		if (result.hasErrors()) {
+			return "add-product.html";
+		}else {
+			Products products = new Products();
+			products.setName(productdto.getName());
+			products.setCategory(productdto.getCategory());
+			products.setDescription(productdto.getDescription());
+			products.setStock(productdto.getStock());
+			products.setPrice(productdto.getPrice());
+			products.setImageUrl(cloudinaryHelper.saveImage(productdto.getImage()));
+			products.setMerchant(merchantEntity);
+			products.setStatus(Status.PENDING);
+			productRepo.save(products);
+			session.setAttribute("pass", "Product Added Success");
+			return "redirect:/merchant/home";
+		}}else {
+			session.setAttribute("fail", "Invalid Session, First Login to Access");
+			return "redirect:/login";
+		}}
+			
+	
+	
+	
 }

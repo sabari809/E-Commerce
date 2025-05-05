@@ -76,7 +76,17 @@ public class CustomerServiceImpl implements CustomerService {
  			session.setAttribute("Fail", "Otp Missmatch");
  			return "redirect:/customer/otp";
 		}
-
- 		
 	}
+	
+	@Override
+	public String loadHome(HttpSession session) {
+		CustomerEntity customerEntity = (CustomerEntity) session.getAttribute("customer");
+		if (customerEntity!=null) {
+			return "customer-home.html";
+		}else {
+			session.setAttribute("fail", "Invalid Session, First Login to Access");
+			return "redirect:/login";
+		}
+	}
+	
 }

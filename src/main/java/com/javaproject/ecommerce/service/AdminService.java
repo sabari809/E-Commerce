@@ -18,4 +18,6 @@ public interface AdminService {
 
 	String submitOtp(int otp, HttpSession session);
 
+	String loadHome(HttpSession session);
+
 }

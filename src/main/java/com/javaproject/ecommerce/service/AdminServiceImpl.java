@@ -14,13 +14,14 @@ import com.javaproject.ecommerce.Helper.EmailSender;
 import com.javaproject.ecommerce.Repository.AdminRepo;
 import com.javaproject.ecommerce.Repository.CustomerRepo;
 import com.javaproject.ecommerce.Repository.MerchantRepo;
+import com.javaproject.ecommerce.controller.AdminController;
 import com.javaproject.ecommerce.dto.userDto;
 
 import jakarta.servlet.http.HttpSession;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	
+
 	
 	@Autowired
 	AdminRepo adminRepo;
@@ -33,6 +34,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	EmailSender emailSender;
+
+   
 	
 	@Override
 	public String register(userDto userDto, Model model) {
@@ -75,7 +78,16 @@ public class AdminServiceImpl implements AdminService {
 				session.setAttribute("fail", "Otp Missmatch");
 				return "redirect:/admin/otp";
 			}
+		}
 			
-			
-	}
+			@Override
+		 	public String loadHome(HttpSession session) {
+		 		AdminEntity admin = (AdminEntity) session.getAttribute("admin");
+		 		if (admin != null) {
+		 			return "admin-home.html";
+		 		}else {
+		 			session.setAttribute("fail", "Invalid Session, First Login to Access");
+		 			return "redirect:/login";
+		 		}
+		 	}
 }

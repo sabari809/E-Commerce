@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.javaproject.ecommerce.dto.Productdto;
 import com.javaproject.ecommerce.dto.userDto;
 import com.javaproject.ecommerce.service.MerchantService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.val;
 
 @Controller
 @RequestMapping("/merchant")
@@ -44,9 +46,17 @@ public class MerchantController {
 	
 	@GetMapping("/home")
  	public String loadHome(HttpSession session) {
-		 session.removeAttribute("pass");
-		 session.removeAttribute("fail");
- 		return "merchant-home.html";
+ 		return merchantService.loadHome(session);
  	}
+	
+	@GetMapping("/add-product")
+	public String loadAddProduct(Productdto productdto,Model model,HttpSession session) {
+		return merchantService.loadAddProduct(productdto,model,session);
+	}
+	
+	@PostMapping("/add-product")
+	public String AddProduct(@Valid Productdto productdto,HttpSession session,BindingResult result) {
+		return merchantService.addProduct(productdto,session,result);
+	}
 	
 }

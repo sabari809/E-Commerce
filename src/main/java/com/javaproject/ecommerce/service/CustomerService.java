@@ -16,4 +16,6 @@ public interface CustomerService {
 
 	public String submitOtp(int otp, HttpSession session);
 
+	public String loadHome(HttpSession session);
+
 }
